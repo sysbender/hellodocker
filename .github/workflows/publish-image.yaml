@@ -14,3 +14,10 @@ jobs:
         run: |
           docker login -u sysbender -p ${{ secrets.DOCKER_HUB_TOKEN }}
           docker push sysbender/hellodocker:latest
+
+      - name: Update repo description
+        uses: peter-evans/dockerhub-description@v3
+        with:
+          username: sysbender
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+          repository: sysbender/hellodocker
