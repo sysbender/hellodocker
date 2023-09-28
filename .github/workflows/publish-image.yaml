@@ -9,6 +9,8 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
       - name: build
-        run: docker build . --file Dockerfile --tag sysbender/hellodocker:$(date +%s)
+        run: docker build . --file Dockerfile --tag sysbender/hellodocker:latest
       - name: publish
-        run: docker push sysbender/hellodocker:$(date +%s)
+        run: |
+          docker login -u sysbender -p ${{ secrets.DOCKER_HUB_TOKEN }}
+          docker push sysbender/hellodocker:latest
